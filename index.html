@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Code Quiz</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <style>
+            body{
+
+                margin: 0;
+                padding: 0;
+                background-color: rgb(240,240,240);
+                font-family: 'Open Sans', sans-serif;
+
+            }
+
+            section{
+
+                width: 95%;
+                position: relative;
+                margin: auto;
+
+            }
+
+            #title{
+
+                font-weight: bold;
+
+            }
+
+            #topSection{
+
+                width: 100%;
+                position: relative;
+                height: 5%;
+                display: block;
+
+            }
+
+            #scoreDiv{
+
+                position: relative;
+                width: 40%;
+                display: inline-block;
+
+            }
+
+            #timeDiv{
+
+                position: relative;
+                width: 40%;
+                display: inline-block;
+                left: 18%;
+                text-align: right;
+
+            }
+
+            #buttonDiv{
+
+                width: 100%;
+                position: relative;
+                text-align: center;
+                height: 5%;
+                background-color: rgb(67, 137, 218);
+                color: white;
+
+            }
+
+            #inputDiv{
+                position: relative;
+                display: none;
+                width: 100%;
+                height: 10%;
+                background-color: rgb(67,137,218);
+            }
+
+            #quizTable{
+
+                position: relative;
+                text-align: left;
+                padding: 5px;
+                width: 100%;
+
+            }
+
+            #bottomText{
+
+                position: relative;
+                text-align: left;
+                display: none;
+
+            }
+
+            #bottomText > button{
+
+                border: none;
+                background-color: rgba(128,128,128,0.2);
+                padding: 5px;
+                margin-top: 5px;
+
+            }
+
+            #retryDiv{
+
+                position: relative;
+                display: none;
+                width: 100%;
+                height: 5%;
+
+            }
+
+            #statusDiv{
+
+                display: none;
+
+            }
+
+            #winRetryDiv{
+
+                display: none;
+
+            }
+
+            #startQuizButton{
+        
+                background-color: inherit;
+                text-decoration: none;
+                font-size: 1.3em;
+                border: none;
+                color: white;
+                width: 100%;
+                height: 100%;
+                padding: 5px 0px;
+            }
+
+            #inputSection{
+
+                position: relative;
+                width: 68%;
+                height: 100%;
+                padding: 0px;
+                display: inline-block;
+
+            }
+
+            #submitButtonDiv{
+
+                position: relative;
+                width: 30%;
+                height: 100%;
+                display: inline-block;
+
+            }
+
+            #myInput{
+
+                position: relative;
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                margin: 0;
+                font-size: 1.3em;
+                top: 0px;
+                box-sizing: border-box;
+
+            }
+
+            #submitButton{
+
+                position: relative;
+                width: 100%;
+                height: 100%;
+                left: -1%;
+                margin: 0;
+                text-decoration: none;
+                border: none;
+                font-size: 1.0em;
+                background-color: rgb(67,137,218);
+                color: white;
+                vertical-align: auto;
+                outline: none;
+
+            }
+
+            #quizTable{
+
+                background-color: rgba(128,128,128,0.2);
+                border-collapse: collapse;
+
+            }
+
+            th{
+
+                background-color: rgba(128,128,128,0.3);
+                font-weight: normal;
+
+            }
+
+            td,th{
+
+                padding: 5px;
+                border-bottom: 1.5px solid rgba(128,128,128,0.5);
+
+            }
+
+            #statusDiv{
+
+                display: none;
+                width: 100%;
+                height: 5%;
+                padding: 2px 0px;
+            }
+
+            #statusDiv > p{
+
+                display: inline;
+
+            }
+
+            #retryButton,#showAnswersButton{
+
+                position: relative;
+                left: 5%;
+                width: 40%;
+                display: inline-block;
+                border: none;
+                height: 100%;
+                font-size: 0.9em;
+                padding: 5px;
+                margin-bottom: 5px;
+
+            }
+
+            #showAnswersButton{
+
+                left: 10%;
+                background-color: rgba(128,128,128,0.3);
+
+            }
+
+            #retryButton{
+
+                color: white;
+                background-color: rgba(0,0,0);
+
+            }
+
+            #howToPlay{
+
+                position: relative;
+                width: 25%;
+                height: 5%;
+
+            }
+
+            #howToPlay > button{
+
+                width: 100%;
+                height: 100%;
+                border: none;
+                font-size: 0.9em;
+                padding: 7px;
+                background-color: black;
+                color: white;
+
+            }
+
+            #howToPlaySection{
+
+                position: relative;
+                display: none;
+                width: calc(100% - 10px);
+                border: 1px solid rgba(128,128,128,0.5);
+                margin-top: 5px;
+                padding: 5px;
+
+            }
+
+            #howToPlaySection > p{
+
+                display: inline;
+
+            }
+
+            #winRetryButton{
+
+                position: relative;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 5px 0px;
+                text-decoration: none;
+                border: none;
+                font-size: 1.0em;
+                background-color: black;
+                color: white;
+                vertical-align: auto;
+                outline: none;
+                margin-bottom: 5px;
+                display: inline-block;
+            }
+
+            #resultsDiv{
+
+                position: relative;
+                display: none;
+                width: 100%;
+                text-align: center;
+
+            }
+
+            #resultsDiv{
+
+                font-weight: bold;
+
+            }
+
+            #footer{
+                position: relative;
+                right: 0;
+                bottom: 0;
+                padding: 5px;
+                font-size: 10px;
+                text-align: right;
+            }
+
+            #footer > p{
+                display: inline;
+            }
+        </style>
+    </head>
+    <section>
+        <div id="title">
+            <p>Pouvez-vous nommer ces 10 langages de programmation ?</p>
+        </div>
+        <div id="howToPlay">
+            <button onclick="showHowToPlay()">Comment jouer</button>
+        </div>
+        <div id="howToPlaySection">
+            <p>Pour démarrer, cliquez sur "Démarrer"<br><br>
+                Une fois que vous avez commencé le quiz, tapez une réponse dans la case et cliquez sur le bouton Soumettre. Si vous avez raison, il remplira le bon emplacement dans le tableau.<br><Br>
+                Continuez à saisir d'autres réponses jusqu'à ce que vous ayez réussi le quiz ou que le temps imparti soit écoulé.<br><br>
+                Si vous ne voulez plus jouer, appuyez simplement sur "Abandonner?" bouton. Vous pouvez ensuite révéler les réponses que vous avez manquées - ou essayer à nouveau.</p><br>
+        </div>
+        <div id="mainBody">
+            <div id="topSection">
+                <div id="timeDiv">
+                    <p><strong>04:00</strong></p>
+                </div>
+            </div>
+            <div id="startQuiz">
+                <div id="buttonDiv">
+                    <button id="startQuizButton" onclick="startQuiz()">Commencer le jeu de devinette Gomycode</button>
+                </div>
+                <div id="inputDiv">
+                    <div id="inputSection">
+                        <input id="myInput" placeholder="Enter your answer" type="text"/>
+                    </div>
+                    <div id="submitButtonDiv">
+                        <button id="submitButton" onclick="checkAnswer()">Envoyer</button>
+                    </div>
+                </div>
+                <div id="retryDiv">
+                    <button id="retryButton" onclick="retry()">Réessayer</button>
+                    <button id="showAnswersButton" onclick="showAnswers()">Voir les reponses</button>
+                </div>
+                <div id="winRetryDiv">
+                    <button id="winRetryButton" onclick="retry()">Réessayer</button>
+                </div>
+            </div>
+            <div id="statusDiv">
+                <p></p>
+            </div>
+            <div id="resultsDiv">
+                <p></p>
+            </div>
+            <div id="quizBody">
+                <table id="quizTable">
+                    <tr>
+                        <th>No.</th>
+                        <th>Hint</th>
+                        <th>Year</th>
+                        <th>Answers</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="bottomText">
+            <button onclick="giveUp()">Abandonner?</button>
+        </div>
+    </section>
+    <script>
+
+        var positionArray = [];
+        var hintsArray = ["Langage de script léger et de haut niveau","Fortement associé au framework .NET de Microsoft","Bjarne Stroustrup","Un langage de programmation polyvalent populaire qui utilise les espaces blancs","Langage de script moins connu qui possède son propre framework Web similaire à son nom","Utilisé pour être très populaire dans la programmation Web","Plus de 3 milliards d'appareils l'utilisent","Développé et utilisé par une énorme entreprise, il devient assez populaire et a une jolie mascotte bleue","Un langage de programmation presque oublié, utilisé côté serveur, il a une mascotte de chameau","Un langage de programmation purement fonctionnel adapté à la logique métier et à l'analyse de données","Ce langage, utilisé dans le développement mobile, a été développé par Apple","Utilisé dans le développement d'applications mobiles","L'avenir (possible) du développement Web","Un type de langage de programmation statique fort, influencé par Java","Utilisé pour être le langage de programmation principal d'une entreprise d'un billion de dollars","Utilisé dans le calcul numérique et le calcul scientifique","Un langage de manipulation de données","Utilisé dans l'analyse statistique et la programmation graphique","Utilisé par une grande entreprise et est lié à JS et il est utilisé dans un framework web","Il a un taux d'approbation élevé parmi ses utilisateurs, mis l'accent sur la vitesse et la sécurité. Rimes avec Poussière."];
+        var yearsArray = ["1995","2000","1985","1990","1995","1995","1995","2009","1987","1990","2014","2011","2017","2004","1984","1957","1986","1993","2012","2010"];
+        var answersArray = ["Javascript","C#","C++","Python","Ruby","Php","Java","Go","Perl","Haskell","Swift","Kotlin","Webassembly","Scala","Objective-c","Fortran","Sql","R","Typescript","Rust"];
+
+        var quizTable = document.getElementById("quizTable");
+        var timeLeft = document.querySelectorAll("#timeDiv > p");
+        var scoreDiv = document.querySelectorAll("#scoreDiv > p");
+        var score;
+        var currTime;
+        var mins;
+        var secs;
+        var anInterval;
+        var howToPlayToggle = false;
+
+        setup();
+
+        function setup(){
+
+            clearInterval(anInterval);
+            positionArray = [];
+
+            for(let i=0; i<10; i++){
+
+                var num = Math.floor(Math.random()*answersArray.length);
+
+                if(positionArray.indexOf(num) == -1){
+
+                    positionArray.push(num);
+                    quizTable.rows[i+1].cells[0].innerHTML = ""+(i+1);
+                    quizTable.rows[i+1].cells[1].innerHTML = ""+hintsArray[num];
+                    quizTable.rows[i+1].cells[2].innerHTML = ""+yearsArray[num];
+                    quizTable.rows[i+1].cells[3].innerHTML = ""+answersArray[num];
+                    quizTable.rows[i+1].cells[3].style.opacity = 0;
+                    quizTable.rows[i+1].cells[3].style.textAlign = "center";
+                    quizTable.rows[i+1].cells[3].style.fontWeight = "bold";
+
+                } else {
+
+                    i--;
+
+                }
+
+            }
+
+        }
+
+        function startQuiz(){
+
+            currTime = 60*4;
+            score = 0;
+            scoreDiv[0].innerHTML = "Score: <strong>"+(score)+" / 10</score>";
+            timeLeft[0].innerHTML = "<strong> 04:00 </strong>";
+
+            document.getElementById("bottomText").style.display = "block";
+            document.getElementById("inputDiv").style.display = "block";
+            document.getElementById("buttonDiv").style.display = "none";
+
+            anInterval = setInterval(function(){
+
+                currTime--;
+
+                mins = Math.floor(currTime/60);
+                secs = currTime%60;
+
+                timeLeft[0].innerHTML = "<strong>"+("0"+mins + ":" + (secs >= 10 ? secs : "0"+secs))+"</strong>";
+
+                if(currTime == 0){
+
+                    console.log("You're out of time");
+                    clearInterval(anInterval);
+                    document.getElementById("inputDiv").style.display = "none";
+                    document.getElementById("statusDiv").style.display = "none";
+                    document.getElementById("retryDiv").style.display = "block";
+                    document.getElementById("resultsDiv").style.display = "block";
+
+                    document.querySelectorAll("#resultsDiv > p")[0].innerHTML = "You got "+ score + "/10 " +checkScore(score);
+
+                }
+
+            },1000);
+        
+        }
+
+        function checkAnswer(){
+
+            var myInput = document.getElementById("myInput");
+            var theInput = (""+myInput.value).toLowerCase();
+
+            theInput = theInput.trim();
+
+            var searcher = answersArray.indexOf(theInput.charAt(0).toUpperCase() + theInput.slice(1));
+
+            document.getElementById("statusDiv").style.display = "block";
+
+            if(searcher != -1 && positionArray.indexOf(searcher) != -1){
+
+                if(quizTable.rows[positionArray.indexOf(searcher)+1].cells[3].style.opacity == "1"){
+
+                    statusMsg = "<strong>Already Answered!</strong>";
+                    document.getElementById("statusDiv").style.backgroundColor = "rgb(128,128,128,0.3)";
+
+                } else {
+
+                    quizTable.rows[positionArray.indexOf(searcher)+1].cells[3].style.opacity = 1;
+                    
+
+                    score++;
+                    scoreDiv[0].innerHTML = "Score: <strong>"+(score)+" / 10</score>";    
+                    statusMsg = "<strong>Correct Answer!</strong>";
+                    document.getElementById("statusDiv").style.backgroundColor = "rgb(150,255,150,0.3)";
+
+                }
+
+                statusMsg += " " + answersArray[searcher];
+
+            } else {
+
+                statusMsg = "<strong>Wrong Answer!</strong> " + myInput.value;
+                document.getElementById("statusDiv").style.backgroundColor = "rgb(255,150,150,0.3)";
+
+            }
+
+            document.querySelectorAll("#statusDiv > p")[0].innerHTML = ""+statusMsg;
+            myInput.value = "";
+
+            if(score == 10){
+
+                clearInterval(anInterval);
+                document.getElementById("inputDiv").style.display = "none";
+                document.getElementById("bottomText").style.display = "block";
+                document.getElementById("statusDiv").style.display = "none";
+                document.getElementById("bottomText").style.display = "none";
+                document.getElementById("winRetryDiv").style.display = "block";
+                document.getElementById("resultsDiv").style.display = "block";
+
+                document.querySelectorAll("#resultsDiv > p")[0].innerHTML = "Well Done you got 10/10! You're a coding genius";
+
+            }
+
+        }
+
+        function showAnswers(){
+
+            for(let i=0; i<10; i++){
+
+                quizTable.rows[i+1].cells[3].style.opacity = "1";
+
+            }
+
+        }
+
+        function retry(){
+
+            hideAnswers();
+            currTime = 60*4;
+            score = 0;
+            scoreDiv[0].innerHTML = "Score: <strong>"+(score)+" / 10</score>";
+            timeLeft[0].innerHTML = "<strong> 04:00 </strong>";
+
+            document.getElementById("retryDiv").style.display = "none";
+            document.getElementById("buttonDiv").style.display = "block";
+            document.getElementById("winRetryDiv").style.display = "none";
+            document.getElementById("resultsDiv").style.display = "none";
+
+            setup();
+            
+        }
+
+        function giveUp(){
+
+            clearInterval(anInterval);
+            document.getElementById("inputDiv").style.display = "none";
+            document.getElementById("retryDiv").style.display = "block";
+            document.getElementById("bottomText").style.display = "none";
+            document.getElementById("statusDiv").style.display = "none";
+            document.getElementById("resultsDiv").style.display = "block";
+
+            document.querySelectorAll("#resultsDiv > p")[0].innerHTML = "You got "+ score + "/10 " +checkScore(score);
+
+        }
+
+        function hideAnswers(){
+
+            for(let i=0; i<10; i++){
+
+                quizTable.rows[i+1].cells[3].style.opacity = "0";
+
+            }
+
+        }
+
+        function showHowToPlay(){
+
+            if(howToPlayToggle == false){
+
+                document.getElementById("howToPlaySection").style.display = "block";
+                howToPlayToggle = true;
+
+            } else {
+
+                document.getElementById("howToPlaySection").style.display = "none";
+                howToPlayToggle = false;
+
+            }
+
+        }
+
+        function checkScore(num){
+
+            if(num < 3){
+
+                return ". That's Bad. You seriously need to learn to study more";
+
+            } else if (num < 6){
+
+                return ". That's Okay. You need to learn more but its not too bad";
+
+            } else if (num < 8){
+
+                return ". That's Decent. The harder ones are a bit tricky";
+
+            } else if (num < 10){
+
+                return ". That's Pretty Good. Just one missing!";
+
+            }
+
+        }
+    
+        /*
+
+            Inspired by: https://www.bbc.co.uk/sport/football/49390169
+
+        */
+
+    </script>
+</html>
